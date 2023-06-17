@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://bwal4ou5q1iqj"]
 
-[ext_resource type="PackedScene" uid="uid://c62pvgrpnqhhu" path="res://Cop.tscn" id="1_74h78"]
+[ext_resource type="PackedScene" uid="uid://c62pvgrpnqhhu" path="res://actors/Player.tscn" id="1_74h78"]
 [ext_resource type="Script" path="res://Main.gd" id="1_xf84o"]
 [ext_resource type="Script" path="res://BulletManager.gd" id="3_68vf8"]
-[ext_resource type="PackedScene" uid="uid://e4575dmqtrnf" path="res://Enemy.tscn" id="3_tnjdi"]
+[ext_resource type="PackedScene" uid="uid://e4575dmqtrnf" path="res://actors/Enemy.tscn" id="3_tnjdi"]
 
 [node name="Main" type="Node2D"]
 position = Vector2(598, 304)

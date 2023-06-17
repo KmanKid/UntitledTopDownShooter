@@ -1,0 +1,92 @@
+[gd_scene load_steps=14 format=3 uid="uid://c62pvgrpnqhhu"]
+
+[ext_resource type="Texture2D" uid="uid://da6hny11f0nvn" path="res://assets/players/topdownpack.png" id="1_gsj0x"]
+[ext_resource type="Script" path="res://actors/Player.gd" id="1_kkcn7"]
+[ext_resource type="PackedScene" uid="uid://bt13clk1pktq8" path="res://weapons/Bullet.tscn" id="2_thc74"]
+[ext_resource type="PackedScene" uid="uid://8xrej777mbhm" path="res://actors/Health.tscn" id="5_1x1ip"]
+[ext_resource type="PackedScene" uid="uid://m4nwedt06s55" path="res://weapons/Weapon.tscn" id="5_pgg8m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v4s5l"]
+atlas = ExtResource("1_gsj0x")
+region = Rect2(32, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0vy6"]
+atlas = ExtResource("1_gsj0x")
+region = Rect2(0, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_se6hr"]
+atlas = ExtResource("1_gsj0x")
+region = Rect2(0, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wse4s"]
+atlas = ExtResource("1_gsj0x")
+region = Rect2(0, 160, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mi2fi"]
+atlas = ExtResource("1_gsj0x")
+region = Rect2(0, 176, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q3cek"]
+atlas = ExtResource("1_gsj0x")
+region = Rect2(0, 192, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vvsel"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v4s5l")
+}],
+"loop": true,
+"name": &"gun_drawn",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h0vy6")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_se6hr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wse4s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mi2fi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q3cek")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 7.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0uyvn"]
+radius = 6.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_kkcn7")
+Bullet = ExtResource("2_thc74")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3.5, 3.5)
+position_smoothing_enabled = true
+position_smoothing_speed = 2.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_vvsel")
+animation = &"gun_drawn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0uyvn")
+
+[node name="Health" parent="." instance=ExtResource("5_1x1ip")]
+
+[node name="Weapon" parent="." instance=ExtResource("5_pgg8m")]
+position = Vector2(4, 0)

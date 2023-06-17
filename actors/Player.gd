@@ -1,22 +1,32 @@
 extends CharacterBody2D
+class_name Player
 
 signal  player_fired_bullet(bullet,position,direction)
 
 @export var Bullet = PackedScene.new()
 @export var default_speed: int = 100.0
-@onready var _animated_sprite = $AnimatedSprite2D
-@onready var end_of_gun = $EndOfGun
-@onready var gun_direction = $GunDirection
-@onready var shoot_cooldown = $ShootCooldown
-@onready var animation_player = $AnimationPlayer
 
-var can_shoot = true
-var health = 100
+@onready var weapon: Weapon = $Weapon
+@onready var _animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var health_stat = $Health
+
+var animation_speed = 1
+
+func _ready():
+	weapon.fired.connect(shoot)
 
 func _physics_process(delta):
-	var speed = default_speed
 	var movement_direction = Vector2.ZERO
 	var animation = "idle"
+	var speed = default_speed
+	
+	if Input.is_action_pressed("sprint"):
+		animation_speed = 1.5
+		speed = speed * 1.5
+	else:
+		animation_speed = 1
+		speed = default_speed
+	
 	if Input.is_action_pressed("walk_up"):
 		movement_direction.y = -1
 		animation = "walk"
@@ -32,30 +42,24 @@ func _physics_process(delta):
 	if Input.is_action_pressed("aim"):
 		speed = 0
 		animation = "gun_drawn"
+		weapon.set_visibility(true)
+	else:
+		weapon.set_visibility(false)
+	
 	velocity = movement_direction.normalized() * speed
 	move_and_slide()
 	speed = default_speed
-	_animated_sprite.play(animation)
+	_animated_sprite.play(animation,animation_speed)
 	
 	look_at(get_global_mouse_position())
 
 func _unhandled_input(event):
-	if (event.is_action_released("shoot") && Input.is_action_pressed("aim") && can_shoot):
-		shoot_cooldown.start()
-		shoot()
-		can_shoot = false
+	if (event.is_action_pressed("shoot") && Input.is_action_pressed("aim")):
+		weapon.shoot()
 
-func shoot():
-	var bullet_instance = Bullet.instantiate()
-	var target = get_global_mouse_position()
-	var direction = gun_direction.global_position - end_of_gun.global_position
-	emit_signal("player_fired_bullet", bullet_instance, end_of_gun.global_position, direction)
-	animation_player.play("MuzzleFlash")
-
-
-func _on_shoot_cooldown_timeout():
-	can_shoot = true
+func shoot(bullet_instance, location: Vector2, direction: Vector2):
+	emit_signal("player_fired_bullet", bullet_instance, location, direction)
 	
 func handle_hit():
-	health -= 20
-	print("Cop Health: ", health)
+	health_stat.health -= 20
+	print("Player Health: ", health_stat.health)

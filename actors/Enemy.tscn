@@ -1,39 +1,39 @@
-[gd_scene load_steps=15 format=3 uid="uid://c62pvgrpnqhhu"]
+[gd_scene load_steps=15 format=3 uid="uid://e4575dmqtrnf"]
 
-[ext_resource type="Texture2D" uid="uid://da6hny11f0nvn" path="res://assets/players/topdownpack.png" id="1_gsj0x"]
-[ext_resource type="Script" path="res://Cop.gd" id="1_kkcn7"]
-[ext_resource type="PackedScene" uid="uid://bt13clk1pktq8" path="res://Bullet.tscn" id="2_thc74"]
-[ext_resource type="Texture2D" uid="uid://eviwaqhe2pek" path="res://assets/projectiles/All_Fire_Bullet_Pixel_16x16_01.png" id="4_rmuha"]
+[ext_resource type="Script" path="res://actors/Enemy.gd" id="1_fo3ce"]
+[ext_resource type="Texture2D" uid="uid://cydp4lb4ul2j2" path="res://assets/players/topdownpack_red.png" id="2_imkec"]
+[ext_resource type="Texture2D" uid="uid://eviwaqhe2pek" path="res://assets/projectiles/All_Fire_Bullet_Pixel_16x16_01.png" id="3_fhkro"]
+[ext_resource type="PackedScene" uid="uid://8xrej777mbhm" path="res://actors/Health.tscn" id="4_vvq7w"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_v4s5l"]
-atlas = ExtResource("1_gsj0x")
+[sub_resource type="AtlasTexture" id="AtlasTexture_fs67q"]
+atlas = ExtResource("2_imkec")
 region = Rect2(32, 128, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_h0vy6"]
-atlas = ExtResource("1_gsj0x")
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1jve"]
+atlas = ExtResource("2_imkec")
 region = Rect2(0, 128, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_se6hr"]
-atlas = ExtResource("1_gsj0x")
+[sub_resource type="AtlasTexture" id="AtlasTexture_0mfr8"]
+atlas = ExtResource("2_imkec")
 region = Rect2(0, 144, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wse4s"]
-atlas = ExtResource("1_gsj0x")
+[sub_resource type="AtlasTexture" id="AtlasTexture_tfw7t"]
+atlas = ExtResource("2_imkec")
 region = Rect2(0, 160, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mi2fi"]
-atlas = ExtResource("1_gsj0x")
+[sub_resource type="AtlasTexture" id="AtlasTexture_u50j0"]
+atlas = ExtResource("2_imkec")
 region = Rect2(0, 176, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_q3cek"]
-atlas = ExtResource("1_gsj0x")
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wo1q"]
+atlas = ExtResource("2_imkec")
 region = Rect2(0, 192, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vvsel"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_v4s5l")
+"texture": SubResource("AtlasTexture_fs67q")
 }],
 "loop": true,
 "name": &"gun_drawn",
@@ -41,7 +41,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_h0vy6")
+"texture": SubResource("AtlasTexture_o1jve")
 }],
 "loop": true,
 "name": &"idle",
@@ -49,16 +49,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_se6hr")
+"texture": SubResource("AtlasTexture_0mfr8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wse4s")
+"texture": SubResource("AtlasTexture_tfw7t")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mi2fi")
+"texture": SubResource("AtlasTexture_u50j0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_q3cek")
+"texture": SubResource("AtlasTexture_4wo1q")
 }],
 "loop": true,
 "name": &"walk",
@@ -102,9 +102,9 @@ _data = {
 "MuzzleFlash": SubResource("Animation_8lsxs")
 }
 
-[node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_kkcn7")
-Bullet = ExtResource("2_thc74")
+[node name="Enemy" type="CharacterBody2D"]
+position = Vector2(-1, 1)
+script = ExtResource("1_fo3ce")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3.5, 3.5)
@@ -114,7 +114,7 @@ position_smoothing_speed = 2.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_vvsel")
-animation = &"gun_drawn"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_0uyvn")
@@ -133,8 +133,8 @@ one_shot = true
 visible = false
 position = Vector2(15, 2.13163e-14)
 rotation = 3.14159
-scale = Vector2(0.7, 0.15)
-texture = ExtResource("4_rmuha")
+scale = Vector2(0.6, 0.4)
+texture = ExtResource("3_fhkro")
 region_enabled = true
 region_rect = Rect2(183, 325, 18, 21)
 
@@ -143,4 +143,6 @@ libraries = {
 "": SubResource("AnimationLibrary_x7grn")
 }
 
-[connection signal="timeout" from="ShootCooldown" to="." method="_on_shoot_cooldown_timeout"]
+[node name="Health" parent="." instance=ExtResource("4_vvq7w")]
+
+[connection signal="timeout" from="ShootCooldown" to="." method="_on_shoot_cooldown_timeout" flags=18]

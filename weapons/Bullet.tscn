@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bt13clk1pktq8"]
 
 [ext_resource type="Texture2D" uid="uid://eviwaqhe2pek" path="res://assets/projectiles/All_Fire_Bullet_Pixel_16x16_01.png" id="1_at4p4"]
-[ext_resource type="Script" path="res://Bullet.gd" id="1_njjox"]
+[ext_resource type="Script" path="res://weapons/Bullet.gd" id="1_njjox"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_27qvf"]
 atlas = ExtResource("1_at4p4")
@@ -41,7 +41,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_30et3"]
 radius = 1.0
-height = 6.0
+height = 4.0
 
 [node name="Bullet" type="Area2D"]
 script = ExtResource("1_njjox")
@@ -54,6 +54,7 @@ sprite_frames = SubResource("SpriteFrames_jfbgo")
 frame_progress = 0.105319
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_30et3")
 
 [node name="KillTimer" type="Timer" parent="."]

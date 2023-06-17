@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=3 uid="uid://m4nwedt06s55"]
+
+[ext_resource type="Script" path="res://weapons/Weapon.gd" id="1_neltf"]
+[ext_resource type="PackedScene" uid="uid://bt13clk1pktq8" path="res://weapons/Bullet.tscn" id="2_47vqi"]
+[ext_resource type="Texture2D" uid="uid://eviwaqhe2pek" path="res://assets/projectiles/All_Fire_Bullet_Pixel_16x16_01.png" id="3_o87rm"]
+[ext_resource type="Texture2D" uid="uid://da6hny11f0nvn" path="res://assets/players/topdownpack.png" id="4_87kgf"]
+
+[sub_resource type="Animation" id="Animation_8lsxs"]
+resource_name = "MuzzleFlash"
+length = 0.05
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon/MuzzleFlash:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Weapon/MuzzleFlash:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.6, 0.4), Vector2(0.7, 0.15)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x7grn"]
+_data = {
+"MuzzleFlash": SubResource("Animation_8lsxs")
+}
+
+[node name="Weapon" type="Node2D"]
+script = ExtResource("1_neltf")
+Bullet = ExtResource("2_47vqi")
+
+[node name="EndOfGun" type="Marker2D" parent="."]
+position = Vector2(4, 0)
+
+[node name="GunDirection" type="Marker2D" parent="."]
+position = Vector2(11, 0)
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="MuzzleFlash" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(10, 0)
+rotation = 3.14159
+scale = Vector2(0.7, 0.15)
+texture = ExtResource("3_o87rm")
+region_enabled = true
+region_rect = Rect2(183, 325, 18, 21)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_x7grn")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.5, 0)
+texture = ExtResource("4_87kgf")
+region_enabled = true
+region_rect = Rect2(41, 199, 7, 2)
