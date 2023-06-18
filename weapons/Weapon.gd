@@ -24,3 +24,4 @@ func set_visibility(isVisible: bool):
 		sprite.visible = true
 	else:
 		sprite.visible = false
+	

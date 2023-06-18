@@ -10,7 +10,6 @@ var direction = Vector2.ZERO
 func _ready():
 	kill_timer.start()
 
-
 func _physics_process(delta):
 	if(direction != Vector2.ZERO):
 		var velocity = direction * speed

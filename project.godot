@@ -15,6 +15,10 @@ run/main_scene="res://menu/Menu.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Globals="*res://Globals.gd"
+
 [input]
 
 walk_right={
