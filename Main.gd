@@ -64,7 +64,7 @@ func add_player_character(peer_id):
 	add_child(player_character)
 	if peer_id == multiplayer.get_unique_id():
 		local_player_character = player_character
-	local_player_character.player_fired_bullet.connect(bullet_manager.handle_bullet_spawned)
+	player_character.player_fired_bullet.connect(bullet_manager.handle_bullet_spawned)
 	
 @rpc
 func add_newly_connected_player_character(new_peer_id):
