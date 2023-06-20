@@ -45,6 +45,7 @@ height = 4.0
 
 [node name="Bullet" type="Area2D"]
 scale = Vector2(5, 5)
+input_pickable = false
 script = ExtResource("1_njjox")
 speed = 20
 
@@ -56,6 +57,7 @@ frame_progress = 0.105319
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
+scale = Vector2(1, 1)
 shape = SubResource("CapsuleShape2D_30et3")
 
 [node name="KillTimer" type="Timer" parent="."]

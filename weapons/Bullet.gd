@@ -15,6 +15,8 @@ func _physics_process(delta):
 		var velocity = direction * speed
 		global_position += velocity
 		animation.play("default") 
+	if(has_overlapping_bodies()):
+		queue_free()
 	
 func set_direction(direction: Vector2):
 	self.direction = direction
@@ -29,3 +31,5 @@ func _on_body_entered(body: Node):
 	if body.has_method("handle_hit"):
 		body.handle_hit()
 		queue_free()
+
+
