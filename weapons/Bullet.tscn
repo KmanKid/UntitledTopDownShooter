@@ -44,8 +44,9 @@ radius = 1.0
 height = 4.0
 
 [node name="Bullet" type="Area2D"]
+scale = Vector2(5, 5)
 script = ExtResource("1_njjox")
-speed = 4
+speed = 20
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(3.05176e-05, 0)
