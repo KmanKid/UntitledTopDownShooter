@@ -78,6 +78,5 @@ region_rect = Rect2(41, 199, 7, 2)
 [node name="GunSound" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(4, 0)
 stream = ExtResource("5_v2gwp")
-volume_db = -7.0
-max_distance = 500.0
+volume_db = -15.0
 attenuation = 1.86607

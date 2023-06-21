@@ -18,7 +18,6 @@ var animation_speed = 1
 func _ready():
 	weapon.fired.connect(shoot)
 	name = str(get_multiplayer_authority())
-	emit_signal("spawn",self)
 
 func _physics_process(delta):
 	if is_multiplayer_authority():

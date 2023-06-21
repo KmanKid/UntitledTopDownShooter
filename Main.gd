@@ -1,7 +1,6 @@
 extends Node2D
 
 @onready var bullet_manager = $BulletManager
-@onready var player: Player = $Player
 @onready var spawner: Spawner = $Spawner
 
 var multiplayer_peer = ENetMultiplayerPeer.new()
@@ -37,7 +36,7 @@ func add_player_character(peer_id):
 	add_child(player_character)
 	player_character.player_fired_bullet.connect(bullet_manager.handle_bullet_spawned)
 	player_character.dead.connect(spawner.respawn_player)
-	player_character.spawn.connect(spawner.spawn_player)
+	spawner.spawn_player(player_character)
 	
 @rpc
 func add_newly_connected_player_character(new_peer_id):
