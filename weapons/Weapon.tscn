@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://m4nwedt06s55"]
+[gd_scene load_steps=8 format=3 uid="uid://m4nwedt06s55"]
 
 [ext_resource type="Script" path="res://weapons/Weapon.gd" id="1_neltf"]
 [ext_resource type="PackedScene" uid="uid://bt13clk1pktq8" path="res://weapons/Bullet.tscn" id="2_47vqi"]
 [ext_resource type="Texture2D" uid="uid://eviwaqhe2pek" path="res://assets/projectiles/All_Fire_Bullet_Pixel_16x16_01.png" id="3_o87rm"]
 [ext_resource type="Texture2D" uid="uid://da6hny11f0nvn" path="res://assets/players/topdownpack.png" id="4_87kgf"]
+[ext_resource type="AudioStream" uid="uid://b8sa0acrx8vbk" path="res://assets/audio/pew.mp3" id="5_v2gwp"]
 
 [sub_resource type="Animation" id="Animation_8lsxs"]
 resource_name = "MuzzleFlash"
@@ -73,3 +74,10 @@ position = Vector2(0.5, 0)
 texture = ExtResource("4_87kgf")
 region_enabled = true
 region_rect = Rect2(41, 199, 7, 2)
+
+[node name="GunSound" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(4, 0)
+stream = ExtResource("5_v2gwp")
+volume_db = -7.0
+max_distance = 500.0
+attenuation = 1.86607

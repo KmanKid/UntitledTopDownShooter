@@ -76,7 +76,7 @@ func remote_set_rotation(authority_rotation):
 @rpc
 func remote_animate(authority_animation, authority_animation_speed):
 	animation_speed = authority_animation_speed
-	_animated_sprite.play(authority_animation,authority_animation_speed)
+	_animated_sprite.play("enemy_"+authority_animation,authority_animation_speed)
 	if authority_animation == "gun_drawn":
 		weapon.set_visibility(true)
 	else:
