@@ -1,30 +1,26 @@
 extends Control
 
-@onready var start_button: Button = $VBoxContainer/StartButton
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	start_button.disabled = true
-	$VBoxContainer/StartButton.grab_focus()
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-
-func _on_start_button_pressed():
-	get_tree().change_scene_to_file("Main.tscn")
+@onready var ip_field: LineEdit  = $VBoxContainer/IP 
 
 func _on_quit_button_pressed():
 	get_tree().quit()
 
 
 func _on_join_pressed():
-	start_button.disabled = false
 	Globals.isHost = false
+	Globals.hostIP = "localhost"
+	get_tree().change_scene_to_file("Main.tscn")
+	
 
 
 func _on_create_button_pressed():
-	start_button.disabled = false
 	Globals.isHost = true
+	Globals.hostIP = "localhost"
+	get_tree().change_scene_to_file("Main.tscn")
+	
+
+
+func _on_ip_text_submitted(adress):
+	Globals.isHost = false
+	Globals.hostIP = adress
+	get_tree().change_scene_to_file("res://Main.tscn")

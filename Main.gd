@@ -6,7 +6,7 @@ extends Node2D
 var multiplayer_peer = ENetMultiplayerPeer.new()
 
 const PORT = 9999
-const ADDRESS = "localhost"
+var address = Globals.hostIP
 var connected_peer_ids = []
 var local_player_character
 
@@ -26,7 +26,7 @@ func _ready():
 				add_player_character(new_peer_id)
 		)
 	else:
-		multiplayer_peer.create_client(ADDRESS,PORT)
+		multiplayer_peer.create_client(address,PORT)
 		multiplayer.multiplayer_peer = multiplayer_peer
 	
 func add_player_character(peer_id):
