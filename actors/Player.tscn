@@ -140,7 +140,7 @@ position_smoothing_speed = 10.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_vvsel")
-animation = &"walk"
+animation = &"enemy_idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_0uyvn")
@@ -149,3 +149,9 @@ shape = SubResource("CircleShape2D_0uyvn")
 
 [node name="Weapon" parent="." instance=ExtResource("5_pgg8m")]
 position = Vector2(4, 0)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+light_mask = 3
+visibility_layer = 3
+blend_mode = 1
+shadow_enabled = true
